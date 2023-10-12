@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DisparoSFX.ogg-97fd6e130c97884cf5954ad856a92b17.oggstr"
+
+[deps]
+
+source_file="res://Juego/Proyectiles/DisparoSFX.ogg"
+dest_files=[ "res://.import/DisparoSFX.ogg-97fd6e130c97884cf5954ad856a92b17.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
