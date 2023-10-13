@@ -9,11 +9,22 @@ var empuje: Vector2 = Vector2.ZERO
 var dir_rotacion:int = 0
 
 onready var canion:Canion = $Canion
+onready var laser:RayoLaser = $LaserBeam2D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	#Disparo Rayo
+	if event.is_action_pressed("disparo_secundario"):
+		laser.set_is_casting(true)
+		
+	if event.is_action_released("disparo_secundario"):
+		laser.set_is_casting(false)
+	
 
 # warning-ignore:unused_argument
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
@@ -26,7 +37,6 @@ func _process(delta: float) -> void:
 	player_input()
 
 
-	
 
 func player_input() -> void:
 #	Empuje

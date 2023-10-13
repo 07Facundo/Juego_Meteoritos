@@ -20,7 +20,7 @@ func conectar_seniales () -> void:
 	
 func crear_contenedores () -> void:
 	contenedor_proyectiles = Node.new()
-	contenedor_proyectiles.name = "ContenedorProyectiles" 
+	contenedor_proyectiles.name = "ContenedorProyectiles"
 	add_child(contenedor_proyectiles)
 	
 func _on_disparo (proyectil: Proyectil) -> void:
