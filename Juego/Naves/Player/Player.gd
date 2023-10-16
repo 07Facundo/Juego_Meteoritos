@@ -14,13 +14,14 @@ export var estela_maxima: int = 150
 var empuje: Vector2 = Vector2.ZERO
 var dir_rotacion:int = 0
 var estado_actual: int = ESTADO.SPAWN
-
+var hitpoints: float = 15.0
 
 onready var canion:Canion = $Canion
 onready var laser:RayoLaser = $LaserBeam2D
 onready var estela: Estela = $EstelaPuntoInicio/Trail2D
 onready var motor_sfx: Motor = $MotorSFX
 onready var colisionador: CollisionShape2D = $CollisionShape2D
+onready var impacto_sfx: AudioStreamPlayer = $AudioStreamPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -115,3 +116,14 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 
 func destruir() -> void:
 	controlar_estados(ESTADO.MUERTO)
+	
+func recibir_danio(danio: float) -> void:
+	hitpoints -= danio
+	if hitpoints <= 0.0:
+		destruir()
+	impacto_sfx.play()
+
+
+
+	
+		
