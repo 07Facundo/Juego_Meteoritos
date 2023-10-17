@@ -27,7 +27,6 @@ func sonido_off() -> void:
 	efecto_transicion(volume_db, volumen_apagado)
 
 func efecto_transicion (desde_vol: float, hasta_vol: float) -> void: 
-# warning-ignore:return_value_discarded
 	tween_sonido.interpolate_property(
 		self,
 		"volume_db",
@@ -37,5 +36,4 @@ func efecto_transicion (desde_vol: float, hasta_vol: float) -> void:
 		Tween.TRANS_LINEAR,
 		Tween.EASE_OUT_IN
 	) 
-# warning-ignore:return_value_discarded
 	tween_sonido.start()
