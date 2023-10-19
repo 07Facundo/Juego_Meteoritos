@@ -25,6 +25,33 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	position += velocidad * delta
 
+#Seniales internas
 
 func _on_VisibilityNotifier2D_screen_exited() -> void:
 	queue_free()
+
+func _on_area_entered(area: Area2D) -> void:
+	daniar(area)
+	
+func _on_body_entered(body: Node) -> void:
+	daniar(body)
+
+func _on_ProyectilEnemigo_area_entered(area: Area2D) -> void:
+	daniar(area)
+
+func _on_ProyectilEnemigo_body_entered(body: Node) -> void:
+	daniar(body)
+
+
+func daniar(otro_cuerpo: CollisionObject2D) -> void:
+	if otro_cuerpo.has_method("recibir_danio"):
+		otro_cuerpo.recibir_danio(danio)
+	queue_free()
+	
+
+
+
+
+
+
+

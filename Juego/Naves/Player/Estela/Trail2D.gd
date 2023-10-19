@@ -5,6 +5,7 @@
 tool
 
 class_name Estela
+
 extends Line2D
 
 export var is_emitting := false setget set_emitting
