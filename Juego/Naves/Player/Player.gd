@@ -128,3 +128,12 @@ func recibir_danio(danio: float) -> void:
 	
 func _on_Timer_timeout() -> void:
 	impacto_sfx.stop()
+
+
+func _on_body_entered(body: Node) -> void:
+	if body is Meteorito:
+		body.destruir()
+		destruir()
+
+
+
