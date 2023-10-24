@@ -10,18 +10,34 @@ export var hitpoints_base: float = 10.0
 
 onready var animation: AnimationPlayer = $AnimationPlayer
 
+## Atributos
+var hitpoints: float
+var esta_en_sector:bool = true setget set_esta_en_sector
+var pos_spawn_original:Vector2
+var vel_spawn_original:Vector2
 
 ## Metodos
 func _ready() -> void:
 	angular_velocity = vel_ang_base
 
+func _integrate_forces(state: Physics2DDirectBodyState) -> void:
+	if esta_en_sector:
+		return
+	var mi_tranform:= state.get_transform()
+	mi_tranform.origin = pos_spawn_original
+	linear_velocity = vel_spawn_original
+	state.set_transform(mi_tranform)
+	esta_en_sector = true 
 
-## Atributos
-var hitpoints: float
+##Setters y Getters
+
+func set_esta_en_sector(valor:bool) ->void:
+	esta_en_sector = valor
 
 ## Constructor
 func crear(pos: Vector2, dir: Vector2, tamanio: float) -> void:
 	position = pos
+	pos_spawn_original = position
 #Calcular Masa, tamaño de Sprite y de Colisionador 
 	mass *= tamanio
 	$Sprite.scale = Vector2.ONE * tamanio
@@ -33,6 +49,7 @@ func crear(pos: Vector2, dir: Vector2, tamanio: float) -> void:
 #Calcular velocidades
 	linear_velocity = (vel_lineal_base * dir / tamanio) * aleatorizar_velocidad() 
 	angular_velocity = (vel_ang_base / tamanio) * aleatorizar_velocidad()
+	vel_spawn_original = linear_velocity
 #Calcular hitpoints
 	hitpoints = hitpoints_base * tamanio
 #Solo Debug
