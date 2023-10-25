@@ -34,13 +34,16 @@ func contr_sector(posicion: Vector2, cant_meteor: int) -> void:
 	cantidad_meteoritos = cant_meteor
 	
 # Seniales Internas
-func _on_Timer_timeout() -> void:
+func _on_SpawnTimer_timeout() -> void:
 	if cantidad_meteoritos == 0:
 		$SpawnTimer.stop()
 		return
 	spawners[spawner_aleatorio()].spawnear_meteorito()
-	cantidad_meteoritos -= 1 
+	cantidad_meteoritos -= 1
+	cantidad_meteoritos += 1
 	
+	
+
 func _on_detector_body_entered(body: Node) ->void:
 	body.set_esta_en_sector(false)
 
@@ -51,3 +54,6 @@ func _on_detector_body_entered(body: Node) ->void:
 #	$SpawnTimer.start()
 		
 		
+
+
+

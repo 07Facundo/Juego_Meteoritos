@@ -8,6 +8,7 @@ export var vel_ang_base: float = 3.0
 export var hitpoints_base: float = 10.0
 
 
+
 onready var animation: AnimationPlayer = $AnimationPlayer
 
 ## Atributos
@@ -15,6 +16,7 @@ var hitpoints: float
 var esta_en_sector:bool = true setget set_esta_en_sector
 var pos_spawn_original:Vector2
 var vel_spawn_original:Vector2
+var esta_destruido: bool = false
 
 ## Metodos
 func _ready() -> void:
@@ -57,7 +59,8 @@ func crear(pos: Vector2, dir: Vector2, tamanio: float) -> void:
 
 
 func recibir_danio(danio: float) -> void:
-	if hitpoints <= 0.0:
+	if hitpoints <= 0.0 and not esta_destruido:
+		esta_destruido = true
 		destruir()
 	else:
 		hitpoints -= danio

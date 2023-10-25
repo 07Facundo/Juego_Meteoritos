@@ -3,7 +3,7 @@ class_name SectorDePeligro
 extends Area2D
 
 export(String, "vacio", "Meteorito", "Enemigo") var tipo_peligro
-export var numero_peligros:int = 10
+export var numero_peligros:int = 5
 
 func _on_body_entered(_body: Node) -> void: 
 	$CollisionShape2D.set_deferred ("disabled", true) 

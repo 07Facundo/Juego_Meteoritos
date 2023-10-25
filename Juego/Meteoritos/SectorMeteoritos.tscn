@@ -290,13 +290,11 @@ direccion = Vector2( -2, -1 )
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 visible = false
-modulate = Color( 1, 1, 1, 0.975 )
 margin_right = 1916.0
 margin_bottom = 1086.0
 color = Color( 1, 0, 0, 0.2 )
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-modulate = Color( 1, 1, 1, 0.98 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -317,4 +315,4 @@ autoplay = "advertencia"
 anims/advertencia = SubResource( 10 )
 anims/default = SubResource( 9 )
 
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
