@@ -3,12 +3,13 @@ class_name Escudo
 extends Area2D
 
 export var energia: float = 12.0
-export var radio_desgaste: float = 1.5
+export var radio_desgaste: float = -1.5
 
 onready var animation: AnimationPlayer = $AnimationPlayer
 onready var colision: CollisionShape2D = $CollisionShape2D 
 
 var esta_activado: bool = false setget, get_esta_activado
+var energia_original: float
 
 # Setters y Getters
 func get_esta_activado() -> bool:
@@ -17,16 +18,15 @@ func get_esta_activado() -> bool:
 # Metodos
 
 func _ready() -> void:
+	energia_original = energia
 	set_process(false)
 	controlar_colisionador(true)
 	
 	
 
 func _process(delta: float) -> void:
-	energia -= radio_desgaste * delta
+	controlar_energia(radio_desgaste * delta)
 	
-	if energia <= 0.0:
-		desactivar()
 	
 
 # Metodos Custom
@@ -47,6 +47,15 @@ func desactivar() -> void:
 	controlar_colisionador(true)
 	animation.play_backwards("activando")
 	$AudioStreamPlayer.stop()
+
+func controlar_energia(consumo: float) -> void:
+	energia += consumo
+	print("Energia Escudo: ", energia)
+	if energia > energia_original:
+		energia = energia_original
+	elif energia <= 0.0:
+		desactivar()
+	
 # Seniales internas
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:

@@ -16,13 +16,20 @@ var estado_actual: int = ESTADO.SPAWN
 var hitpoints: float = 15.0
 
 onready var canion:Canion = $Canion
-onready var laser:RayoLaser = $LaserBeam2D
+onready var laser:RayoLaser = $LaserBeam2D setget, get_laser
 onready var estela: Estela = $EstelaPuntoInicio/Trail2D
 onready var motor_sfx: Motor = $MotorSFX
 onready var colisionador: CollisionShape2D = $CollisionShape2D
 onready var impacto_sfx: AudioStreamPlayer = $AudioStreamPlayer
-onready var escudo: Escudo = $Escudo
+onready var escudo: Escudo = $Escudo setget, get_escudo
 onready var off_impactoSFX: Timer = $TimerOffImpacto
+
+
+func get_laser() -> RayoLaser:
+	return laser
+
+func get_escudo() -> Escudo:
+	return escudo
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -134,6 +141,10 @@ func _on_body_entered(body: Node) -> void:
 	if body is Meteorito:
 		body.destruir()
 		destruir()
+		
+		
 
+		
+	
 
 

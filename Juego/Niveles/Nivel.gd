@@ -45,7 +45,7 @@ func crear_contenedores () -> void:
 	contenedor_sec_meteor.name = "ContenedorSectorMeteoritos"
 	add_child(contenedor_sec_meteor)
 	
-func _on_disparo (proyectil: Proyectil) -> void:
+func _on_disparo(proyectil: Proyectil) -> void:
 	contenedor_proyectiles.add_child (proyectil)
 
 func _on_nave_destruida(posicion: Vector2, num_explosiones: int) ->void:
