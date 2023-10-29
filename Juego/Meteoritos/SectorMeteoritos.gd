@@ -48,10 +48,6 @@ func _on_detector_body_entered(body: Node) ->void:
 	body.set_esta_en_sector(false)
 
 
-#func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
-#	if anim_name == "advertencia":
-#		_on_Timer_timeout()
-#	$SpawnTimer.start()
 		
 		
 
