@@ -2,7 +2,7 @@ class_name EstacionRecarga
 
 extends Node2D
 
-export var energia: float = 20.0
+export var energia: float = 4.0
 export var radio_energia_entregada: float = 0.1
 
 var nave_player: Player = null
@@ -31,7 +31,6 @@ func puede_recargar(event: InputEvent) -> bool:
 			carga_sfx.play()
 		else:
 			carga_sfx.stop()
-#			on_sonidos_car= true
 		return true
 	return false
 
@@ -61,6 +60,7 @@ func _on_AreaRecarga_body_entered(body: Node) -> void:
 func _on_AreaRecarga_body_exited(body: Node) -> void:
 	player_en_zona = false
 	vacio_sfx.stop()
+	carga_sfx.stop()
 	body.set_gravity_scale(0.0)
 	
 func on_sonido_vacio(event: InputEvent) ->void:

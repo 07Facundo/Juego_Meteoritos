@@ -48,7 +48,7 @@ func crear_contenedores () -> void:
 func _on_disparo(proyectil: Proyectil) -> void:
 	contenedor_proyectiles.add_child (proyectil)
 
-func _on_nave_destruida(nave: Player, posicion: Vector2, num_explosiones: int) ->void:
+func _on_nave_destruida(nave: RigidBody2D, posicion: Vector2, num_explosiones: int) ->void:
 	if nave is Player:
 		transicion_camaras(
 			posicion,
