@@ -28,7 +28,7 @@ linear_damp = 1.5
 angular_damp = 4.5
 script = ExtResource( 11 )
 explosiones_naves = 3
-potencia_motor = 18
+potencia_motor = 30
 potencia_rotacion = 260
 estela_maxima = 150
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Juego/Naves/NaveBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Juego/Naves/Enemigo/EnemigoInterceptor.gd" type="Script" id=2]
@@ -204,14 +204,21 @@ tracks/4/keys = {
 "values": [ true, true ]
 }
 
+[sub_resource type="CircleShape2D" id=6]
+radius = 530.83
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 898.286
+
 [node name="EnemigoInterceptor" instance=ExtResource( 1 )]
 collision_layer = 2
-collision_mask = 13
+collision_mask = 15
 physics_material_override = SubResource( 5 )
 contacts_reported = 2
 contact_monitor = true
 script = ExtResource( 2 )
 explosiones_naves = 1
+potencia_max = 600.0
 
 [node name="Sprite" parent="." index="0"]
 rotation = -1.5708
@@ -246,11 +253,22 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 4 )
 
 [node name="AreaDisparo" type="Area2D" parent="." index="6"]
-collision_layer = 2
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDisparo" index="0"]
+shape = SubResource( 6 )
 
 [node name="AreaDeteccion" type="Area2D" parent="." index="7"]
-collision_layer = 2
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeteccion" index="0"]
+modulate = Color( 0, 1, 0.109804, 1 )
+shape = SubResource( 7 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="AreaDisparo" to="." method="_on_AreaDisparo_body_entered"]
+[connection signal="body_exited" from="AreaDisparo" to="." method="_on_AreaDisparo_body_exited"]
+[connection signal="body_entered" from="AreaDeteccion" to="." method="_on_AreaDeteccion_body_entered"]
+[connection signal="body_exited" from="AreaDeteccion" to="." method="_on_AreaDeteccion_body_exited"]
 
 [editable path="Canion"]
