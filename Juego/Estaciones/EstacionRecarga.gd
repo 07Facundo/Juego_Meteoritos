@@ -54,14 +54,14 @@ func _on_AreaRecarga_body_entered(body: Node) -> void:
 		nave_player = body
 		player_en_zona = true
 		
-	body.set_gravity_scale(0.5)
+	
 
 
 func _on_AreaRecarga_body_exited(body: Node) -> void:
 	player_en_zona = false
 	vacio_sfx.stop()
 	carga_sfx.stop()
-	body.set_gravity_scale(0.0)
+	
 	
 func on_sonido_vacio(event: InputEvent) ->void:
 	var pres_tecla = event.is_action("recarga_escudo") or event.is_action("recarga_laser")
