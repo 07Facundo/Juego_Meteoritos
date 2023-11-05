@@ -36,7 +36,7 @@ func conectar_seniales () -> void:
 	Eventos.connect("destruccion_meteor",self,"_on_destruccion_meteor")
 	Eventos.connect("nave_en_sector_peligro",self, "_on_nave_en_sector_peligro")
 	Eventos.connect("base_destruida",self, "_on_base_destruida")
-	
+	Eventos.connect("spawn_orbital",self, "_on_spawn_orbital")
 	
 func crear_contenedores () -> void:
 	contenedor_proyectiles = Node.new()
@@ -68,12 +68,13 @@ func _on_nave_destruida(nave: RigidBody2D, posicion: Vector2, num_explosiones: i
 		)
 	crear_explosion(posicion, num_explosiones, 0.6, Vector2(100.0, 50.0))
 
-func _on_base_destruida(pos_partes:Array) ->void:
+func _on_base_destruida(_base, pos_partes:Array) ->void:
 	for posicion in pos_partes:
 		crear_explosion(posicion)
 		yield(get_tree().create_timer(0.5),"timeout")
 
-
+func _on_spawn_orbital(enemigo:EnemigoOrbital) ->void:
+	contenedor_enemigos.add_child(enemigo)
 
 func  crear_explosion(
 	posicion:Vector2,
@@ -165,13 +166,13 @@ func crear_posicion_aleatoria(rango_horizontal:float, rango_vertical:float) ->Ve
 	return Vector2(rand_x, rand_y)
 
 func crear_sector_enemigos(num_enemigos:int) ->void:
-	for i in range(num_enemigos):
+	for _i in range(num_enemigos):
 		var new_interceptor: EnemigoInterceptor = enemigo_interceptor.instance()
 		var spawn_pos:Vector2 = crear_posicion_aleatoria(1000.0, 800.0)
 		new_interceptor.global_position = player.global_position + spawn_pos
 		contenedor_enemigos.add_child(new_interceptor)
 
 
-func _on_TweenCamera_tween_completed(object: Object, key: NodePath) -> void:
+func _on_TweenCamera_tween_completed(object: Object, _key: NodePath) -> void:
 	if object.name == "CameraPlayer":
 		object.global_position = $Player.global_position

@@ -57,7 +57,7 @@ func _on_AreaRecarga_body_entered(body: Node) -> void:
 	
 
 
-func _on_AreaRecarga_body_exited(body: Node) -> void:
+func _on_AreaRecarga_body_exited(_body: Node) -> void:
 	player_en_zona = false
 	vacio_sfx.stop()
 	carga_sfx.stop()
