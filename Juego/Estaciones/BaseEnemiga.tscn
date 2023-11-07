@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Juego/Estaciones/AreaAtraccion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Juego/Estaciones/spaceStation4.png" type="Texture" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://Juego/Estaciones/BaseEnemiga.gd" type="Script" id=6]
 [ext_resource path="res://Juego/Estaciones/AreaCollision.gd" type="Script" id=7]
 [ext_resource path="res://Juego/Estaciones/PosicionesSpawn.gd" type="Script" id=8]
+[ext_resource path="res://Juego/Naves/Enemigo/EnemigoOrbital.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Juego/Estaciones/RutaEnemigo2.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Juego/Estaciones/RutaEnemigo.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 73.0
@@ -109,13 +112,10 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=8]
 radius = 704.815
 
-[sub_resource type="Curve2D" id=9]
-_data = {
-"points": PoolVector2Array( 49.8902, 78.399, -49.8902, -78.399, -696.173, -38.6356, -156.798, -35.6359, 156.798, 35.6359, -539.375, -209.688, -171.052, 117.598, 171.052, -117.598, -535.811, -452.012, -28.5087, 117.598, 28.5087, -117.598, -272.105, -533.974, -138.98, -10.6908, 138.98, 10.6908, -8.3999, -705.027, -106.908, 42.7631, 106.908, -42.7631, 298.069, -555.356, -14.2544, -142.544, 14.2544, 142.544, 529.702, -448.448, -185.307, 14.2544, 185.307, -14.2544, 551.083, -191.87, 0, 0, 0, 0, 690.063, -27.9448, -110.471, -124.726, 110.471, 124.726, 579.592, 196.561, 32.0723, 0, -32.0723, 0, 522.575, 442.449, -28.5087, -135.416, 28.5087, 135.416, 283.814, 499.466, 142.544, 0, -142.544, 0, 2.29077, 684.773, 78.399, 178.179, -78.399, -178.179, -240.033, 535.102, 103.344, 42.7631, -103.344, -42.7631, -521.557, 460.267, 167.489, 14.2544, -167.489, -14.2544, -507.302, 153.798, 0, 0, 0, 0, -699.736, -42.1992 )
-}
-
 [node name="BaseEnemiga" type="Node2D"]
 script = ExtResource( 6 )
+orbital = ExtResource( 9 )
+rutas = [ ExtResource( 11 ), ExtResource( 10 ) ]
 
 [node name="Sprites" type="Node2D" parent="."]
 
@@ -136,7 +136,7 @@ position = Vector2( 4, -218 )
 texture = ExtResource( 2 )
 
 [node name="AreaCollision" type="Area2D" parent="Sprites"]
-collision_layer = 33
+collision_layer = 32
 collision_mask = 9
 script = ExtResource( 7 )
 
@@ -182,9 +182,6 @@ position = Vector2( 600, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 8 )
-
-[node name="RutaEnemigo" type="Path2D" parent="."]
-curve = SubResource( 9 )
 
 [node name="TimerSpawnerEnemigos" type="Timer" parent="."]
 

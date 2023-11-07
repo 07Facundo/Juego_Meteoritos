@@ -12,6 +12,7 @@
 [ext_resource path="res://Juego/Naves/Player/TimerOffImpacto.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Juego/Naves/Player/Player.gd" type="Script" id=11]
 
+
 [sub_resource type="CircleShape2D" id=1]
 radius = 40.2388
 
