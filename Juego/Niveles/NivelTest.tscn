@@ -38,13 +38,19 @@ __meta__ = {
 
 [node name="ContenedorEstaciones" type="Node" parent="."]
 
-[node name="EstacionRecarga" parent="ContenedorEstaciones" instance=ExtResource( 12 )]
+[node name="EstacionRecarga" parent="ContenedorEstaciones" groups=["mini_mapa"] instance=ExtResource( 12 )]
 position = Vector2( 2060.93, 548.071 )
+
+[node name="EstacionRecarga2" parent="ContenedorEstaciones" groups=["mini_mapa"] instance=ExtResource( 12 )]
+position = Vector2( 8074.51, 6515.44 )
 
 [node name="ContenedorBasesEnemigas" type="Node" parent="."]
 
-[node name="BaseEnemiga" parent="ContenedorBasesEnemigas" instance=ExtResource( 14 )]
+[node name="BaseEnemiga" parent="ContenedorBasesEnemigas" groups=["mini_mapa"] instance=ExtResource( 14 )]
 position = Vector2( 1009.02, 2851 )
+
+[node name="BaseEnemiga2" parent="ContenedorBasesEnemigas" groups=["mini_mapa"] instance=ExtResource( 14 )]
+position = Vector2( 8186.72, -4718.69 )
 
 [node name="TriggersInterceptores" type="Node" parent="."]
 
