@@ -50,12 +50,13 @@ func desactivar() -> void:
 
 func controlar_energia(consumo: float) -> void:
 	energia += consumo
-	print("Energia Escudo: ", energia)
 	if energia > energia_original:
 		energia = energia_original
 	elif energia <= 0.0:
+		Eventos.emit_signal("ocultar_energia_escudo")
 		desactivar()
-	
+		return
+	Eventos.emit_signal("cambio_energia_escudo", energia_original, energia)
 # Seniales internas
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
@@ -66,8 +67,7 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	area.queue_free()
-	
-	
+
 
 func _on_body_entered(body: Node) -> void:
 	body.queue_free()

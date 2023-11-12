@@ -14,3 +14,24 @@ signal base_destruida(base, posiciones)
 
 signal spawn_orbital(orbital)
 
+#HUD
+
+signal nivel_iniciando()
+
+signal nivel_terminado()
+
+signal detector_zona_recarga(entrando)
+
+signal cambio_numero_meteoritos(numero)
+
+signal actualizar_tiempo(tiempo_restante)
+
+signal cambio_energia_laser(energia_max, energia_actual)
+
+signal ocultar_energia_laser()
+
+signal cambio_energia_escudo(energia_max, energia_actual)
+
+signal ocultar_energia_escudo()
+
+
