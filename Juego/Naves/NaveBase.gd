@@ -11,11 +11,12 @@ var estado_actual: int = ESTADO.SPAWN
 onready var colisionador: CollisionShape2D = $CollisionShape2D
 onready var impacto_sfx: AudioStreamPlayer = $ImpactoSfx
 onready var canion:Canion = $Canion
+onready var barra_salud: BarraSalud = $BarraSalud
 
 
-
-# Called when the node enters the scene tree for the first time.
+## Metodos
 func _ready() -> void:
+	barra_salud.set_valores(hitpoints)
 	controlar_estados(estado_actual)
 
 
@@ -48,9 +49,9 @@ func recibir_danio(danio: float) -> void:
 	hitpoints -= danio
 	if hitpoints <= 0.0:
 		destruir()
-	impacto_sfx.play()
 #	off_impactoSFX.start()
-	
+	barra_salud.controlar_barra(hitpoints, true)
+	impacto_sfx.play()
 	
 func _on_Timer_timeout() -> void:
 	impacto_sfx.stop()

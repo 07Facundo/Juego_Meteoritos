@@ -12,6 +12,11 @@ var player_en_zona:bool = false
 #var on_sonidos_vac: bool = false
 onready var carga_sfx:AudioStreamPlayer = $CargaSfx
 onready var vacio_sfx:AudioStreamPlayer2D = $VacioSfx
+onready var barra_energia: ProgressBar = $BarraEnergia
+
+func _ready() -> void:
+	barra_energia.max_value = energia
+	barra_energia.value = energia
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not puede_recargar(event):
@@ -45,8 +50,7 @@ func controlar_energia() -> void:
 	if energia <= 0.0 : 
 		vacio_sfx.play()
 #		on_sonidos_vac= true
-#Solo Debug, QUITAR 
-	print("Energia Estacion: ", energia)
+	barra_energia.value = energia
 	
 	
 func _on_AreaColision_body_entered(body: Node) -> void:
