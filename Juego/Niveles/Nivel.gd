@@ -95,17 +95,17 @@ func _on_nave_destruida(nave: RigidBody2D, posicion: Vector2, num_explosiones: i
 		$RestartTimer.start()
 	elif nave is EnemigoInterceptor:
 		cant_enemigos -= 1
+		if cant_enemigos == 0:
+			MusicaJuego.transicion_musicas()
 	crear_explosion(posicion, num_explosiones, 0.6, Vector2(100.0, 50.0))
 	
-	if cant_enemigos == 0:
-		MusicaJuego.transicion_musicas()
-	
-	
+
 
 func _on_base_destruida(_base, pos_partes:Array) ->void:
 	for posicion in pos_partes:
 		crear_explosion(posicion)
 		yield(get_tree().create_timer(0.5),"timeout")
+
 	numero_bases_enemigas -= 1
 	if numero_bases_enemigas == 0:
 		crear_rele()
@@ -218,8 +218,8 @@ func crear_posicion_aleatoria(rango_horizontal:float, rango_vertical:float) ->Ve
 	return Vector2(rand_x, rand_y)
 
 func crear_sector_enemigos(num_enemigos:int) ->void:
-	cant_enemigos = num_enemigos
 	MusicaJuego.transicion_musicas()
+	cant_enemigos = num_enemigos
 	for _i in range(num_enemigos):
 		var new_interceptor: EnemigoInterceptor = enemigo_interceptor.instance()
 		var spawn_pos:Vector2 = crear_posicion_aleatoria(1000.0, 800.0)

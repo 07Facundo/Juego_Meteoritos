@@ -35,7 +35,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 30, 30 ) ]
+"values": [ Vector2( 43, 43 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AreaRecarga/SpriteZonaRecarga:modulate")
@@ -76,7 +76,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 30, 30 ), Vector2( 32, 32 ), Vector2( 30, 30 ), Vector2( 31, 31 ), Vector2( 30, 30 ) ]
+"values": [ Vector2( 43, 43 ), Vector2( 45, 45 ), Vector2( 43, 43 ), Vector2( 44, 44 ), Vector2( 43, 43 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AreaRecarga/SpriteZonaRecarga:modulate")
@@ -88,7 +88,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.180392, 2, 0.462745, 0.0470588 ), Color( 0.180392, 2, 0.462745, 0.0941176 ), Color( 0.180392, 2, 0.462745, 0.0470588 ), Color( 0.180392, 2, 0.462745, 0.0705882 ), Color( 0.180392, 2, 0.462745, 0.0470588 ) ]
+"values": [ Color( 0.219608, 0, 1, 0.0470588 ), Color( 0.219608, 0, 1, 0.0470588 ), Color( 0.219608, 0, 1, 0.0470588 ), Color( 0.219608, 0, 1, 0.0470588 ), Color( 0.219608, 0, 1, 0.0470588 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -116,7 +116,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 30, 30 ) ]
+"values": [ Vector2( 43, 43 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AreaRecarga/SpriteZonaRecarga:modulate")
@@ -128,7 +128,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 0.196078, 2, 0.180392, 0.0470588 ) ]
+"values": [ Color( 0.219608, 0, 1, 0.0470588 ) ]
 }
 
 [sub_resource type="DynamicFont" id=6]
@@ -195,3 +195,5 @@ value = 80.0
 [connection signal="body_entered" from="AreaColision" to="." method="_on_AreaColision_body_entered"]
 [connection signal="body_entered" from="AreaRecarga" to="." method="_on_AreaRecarga_body_entered"]
 [connection signal="body_exited" from="AreaRecarga" to="." method="_on_AreaRecarga_body_exited"]
+
+[editable path="AreaRecarga"]

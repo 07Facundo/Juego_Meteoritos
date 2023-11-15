@@ -15,7 +15,7 @@ onready var laser:RayoLaser = $LaserBeam2D setget, get_laser
 onready var estela: Estela = $EstelaPuntoInicio/Trail2D
 onready var motor_sfx: Motor = $MotorSFX
 onready var escudo: Escudo = $Escudo setget, get_escudo
-onready var off_impactoSFX: Timer = $TimerOffImpacto
+
 
 ##Setters y Getters
 func get_laser() -> RayoLaser:
@@ -64,6 +64,8 @@ func _process(_delta: float) -> void:
 func player_input() -> void:
 	if not input_is_activo():
 		return
+
+
 #	Empuje
 	empuje = Vector2.ZERO
 	if Input.is_action_pressed("mover_adelante"):

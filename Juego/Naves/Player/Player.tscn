@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Juego/Naves/Player/player_orange.png" type="Texture" id=1]
 [ext_resource path="res://Juego/Naves/Player/CameraPlayer.tscn" type="PackedScene" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Juego/Motor/MotorSFX.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Juego/Naves/Player/MaterialFisico.tres" type="PhysicsMaterial" id=8]
 [ext_resource path="res://Juego/Naves/Player/Escudo/Escudo.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Juego/Naves/Player/TimerOffImpacto.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Juego/Naves/Player/Player.gd" type="Script" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -57,9 +56,11 @@ position = Vector2( -13.1348, -0.26487 )
 [node name="LaserBeam2D" parent="." index="8" instance=ExtResource( 5 )]
 position = Vector2( 32.354, -0.667419 )
 
-[node name="TimerOffImpacto" parent="." index="9" instance=ExtResource( 10 )]
-
 [node name="MotorSFX" parent="." index="10" instance=ExtResource( 7 )]
+
+[node name="TimerOffImpacto" parent="." index="11"]
+one_shot = true
+autostart = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 

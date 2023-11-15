@@ -104,6 +104,7 @@ func _on_AreaCollision_body_entered(body: Node) -> void:
 
 func _on_VisibilityNotifier2D_screen_entered() -> void:
 	$VisibilityNotifier2D.queue_free()
+
 	posicion_spawn = deteccion_cuadrante()
 	spawnear_orbital()
 	timer_spawner.start()
@@ -115,3 +116,5 @@ func _on_TimerSpawnerEnemigos_timeout() -> void:
 		timer_spawner.stop()
 		return
 	spawnear_orbital()
+
+

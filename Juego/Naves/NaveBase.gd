@@ -12,6 +12,7 @@ onready var colisionador: CollisionShape2D = $CollisionShape2D
 onready var impacto_sfx: AudioStreamPlayer = $ImpactoSfx
 onready var canion:Canion = $Canion
 onready var barra_salud: BarraSalud = $BarraSalud
+onready var timer_offImpacto_sfx: Timer = $TimerOffImpacto
 
 
 ## Metodos
@@ -49,7 +50,7 @@ func recibir_danio(danio: float) -> void:
 	hitpoints -= danio
 	if hitpoints <= 0.0:
 		destruir()
-#	off_impactoSFX.start()
+	timer_offImpacto_sfx.start()
 	barra_salud.controlar_barra(hitpoints, true)
 	impacto_sfx.play()
 	
@@ -61,9 +62,7 @@ func _on_body_entered(body: Node) -> void:
 	if body is Meteorito:
 		body.destruir()
 		destruir()
-		
-
-		
 
 
-
+func _on_TimerOffImpacto_timeout() -> void:
+	impacto_sfx.stop()

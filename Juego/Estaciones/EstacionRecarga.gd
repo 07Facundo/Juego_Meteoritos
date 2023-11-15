@@ -3,7 +3,7 @@ class_name EstacionRecarga
 extends Node2D
 
 export var energia: float = 4.0
-export var radio_energia_entregada: float = 0.1
+export var radio_energia_entregada: float = 0.5
 
 var nave_player: Player = null
 var player_en_zona:bool = false

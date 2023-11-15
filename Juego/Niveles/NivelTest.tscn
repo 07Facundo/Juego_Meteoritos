@@ -7,7 +7,7 @@
 [ext_resource path="res://Juego/Explosiones/Explosion.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Juego/Meteoritos/Meteorito.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Juego/Explosiones/ExplosionMeteorito.tscn" type="PackedScene" id=7]
-[ext_resource path="res://TemporalAssets/kenney_space-shooter-redux/Backgrounds/black.png" type="Texture" id=8]
+[ext_resource path="res://Juego/Fondo/StarFieldBackground.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Juego/Meteoritos/SectorMeteoritos.tscn" type="PackedScene" id=9]
 [ext_resource path="res://icon.png" type="Texture" id=10]
 [ext_resource path="res://Juego/Niveles/CamaraJuego.gd" type="Script" id=11]
@@ -75,21 +75,6 @@ script = ExtResource( 11 )
 
 [node name="ActualizadorTimer" type="Timer" parent="."]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-visible = false
-scroll_ignore_camera_zoom = true
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-z_as_relative = false
-motion_scale = Vector2( 0, 1 )
-motion_mirroring = Vector2( 256, 256 )
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-margin_right = 2048.0
-margin_bottom = 2048.0
-texture = ExtResource( 8 )
-expand = true
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 775.749, 648.938 )
 
@@ -97,6 +82,9 @@ position = Vector2( 775.749, 648.938 )
 position = Vector2( 3003.14, 1695.52 )
 scale = Vector2( -0.015625, 1 )
 texture = ExtResource( 10 )
+
+[node name="StarFieldBackground" parent="." instance=ExtResource( 8 )]
+color_fondo = Color( 0.0117647, 0.0117647, 0.109804, 1 )
 
 [connection signal="tween_completed" from="CameraNivel/TweenZoom" to="." method="_on_TweenCamera_tween_completed"]
 [connection signal="timeout" from="RestartTimer" to="." method="_on_RestartTimer_timeout"]
