@@ -55,7 +55,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		set_esta_visible(not esta_visible)
 
 
-func _process (delta: float) -> void:
+func _process (_delta: float) -> void:
 	if not player:
 		return
 	icono_player.rotation_degrees = player.rotation_degrees + 90
@@ -67,6 +67,7 @@ func conectar_seniales() ->void:
 	Eventos.connect("nave_destruida", self, "_on_nave_destruida")
 	Eventos.connect("minimapa_objeto_creado", self, "obtener_objetos_minimapa")
 	Eventos.connect("minimapa_objeto_destruido", self, "quitar_icono")
+	
 func _on_nivel_iniciado() ->void:
 	player = DatosJuego.get_player_actual()
 	obtener_objetos_minimapa()

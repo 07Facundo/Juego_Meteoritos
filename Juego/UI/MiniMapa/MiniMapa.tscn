@@ -48,6 +48,8 @@ visible = false
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 77.3624, 116.044 )
 scale = Vector2( 0.5, 0.5 )
+z_index = 1
+z_as_relative = false
 texture = ExtResource( 4 )
 
 [node name="IconoEstacion" type="Sprite" parent="CuadroMiniMapa/ContenedorIconos/ZonaRenderizadoMiniMapa"]
@@ -55,6 +57,8 @@ visible = false
 modulate = Color( 0.85098, 0.00784314, 1, 1 )
 position = Vector2( 266.564, 47.0901 )
 scale = Vector2( 0.6, 0.6 )
+z_index = 1
+z_as_relative = false
 texture = ExtResource( 5 )
 
 [node name="IconoRele" type="Sprite" parent="CuadroMiniMapa/ContenedorIconos/ZonaRenderizadoMiniMapa"]

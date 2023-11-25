@@ -12,6 +12,9 @@ onready var musica_combate:AudioStreamPlayer = $MusicaCombate
 onready var tween_on: Tween = $TweenMusicaOn
 onready var tween_off: Tween = $TweenMusicaOff
 onready var lista_musicas: Dictionary ={ "menu_principal": $MusicaMenuPrincipal } setget, get_lista_musicas
+onready var musica_menu_principal: AudioStreamPlayer = $MusicaMenuPrincipal
+onready var musica_menu_victoria: AudioStreamPlayer = $MusicaMenuVictoria
+onready var boton_menu: AudioStreamPlayer = $BotonMenu
 
 func get_lista_musicas() -> Dictionary:
 	return lista_musicas
@@ -19,7 +22,8 @@ func get_lista_musicas() -> Dictionary:
 
 ## Metodos Custom
 func play_boton() ->void:
-	$BotonMenu.play()
+	boton_menu.play()
+
 
 func play_musica(musica: AudioStreamPlayer) -> void: 
 	stop_todo ()
@@ -33,6 +37,7 @@ func set_streams(stream_musica: AudioStream, stream_combate: AudioStream) -> voi
 
 func play_musica_nivel()-> void:
 	stop_todo()
+	musica_nivel.volume_db = -15
 	musica_nivel.play()
 	
 
@@ -41,6 +46,9 @@ func stop_todo() -> void:
 		if nodo is AudioStreamPlayer: 
 			nodo.stop()
 
+func onof_musicas_princ(valor: bool) ->void:
+	musica_nivel.stream_paused = valor
+	musica_combate.stream_paused = valor
 
 func transicion_musicas() -> void:
 	if musica_nivel.playing:
@@ -52,6 +60,7 @@ func transicion_musicas() -> void:
 		
 
 func fade_in(musica_fade_in: AudioStreamPlayer) -> void:
+	musica_fade_in.volume_db = -15
 	var volumen_original = musica_fade_in.volume_db 
 	musica_fade_in.volume_db = volumen_apagado
 	musica_fade_in.play() 
@@ -67,7 +76,8 @@ func fade_in(musica_fade_in: AudioStreamPlayer) -> void:
 	tween_on.start()
 
 
-func fade_out(musica_fade_out: AudioStreamPlayer) -> void: 
+func fade_out(musica_fade_out: AudioStreamPlayer) -> void:
+	musica_fade_out.volume_db = -15
 	vol_original_musica_off = musica_fade_out.volume_db
 	tween_off.interpolate_property(
 		musica_fade_out,
@@ -97,3 +107,14 @@ func _on_MusicaCombate_finished() -> void:
 	if not musica_nivel.is_playing():
 		musica_combate.play()
 
+
+
+func _on_MusicaMenuPrincipal_finished() -> void:
+	musica_menu_principal.play()
+
+func destruir_musica(musica: AudioStreamPlayer) ->void:
+	musica.queue_free()
+
+
+func _on_MusicaMenuVictoria_finished() -> void:
+	musica_menu_victoria.play()

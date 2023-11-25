@@ -143,12 +143,13 @@ bg_color = Color( 0, 0.556863, 0.054902, 1 )
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 1, 0.309804, 0.00784314, 1 )
 
-[node name="EstacionRecarga" type="Node2D"]
+[node name="EstacionRecarga" type="Node2D" groups=["mini_mapa"]]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_vertical_guides_": [ -91.227 ]
 }
 energia = 77.0
+radio_energia_entregada = 0.3
 
 [node name="AreaColision" type="Area2D" parent="."]
 collision_layer = 32

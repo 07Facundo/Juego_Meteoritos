@@ -4,7 +4,8 @@ extends Node2D
 
 signal body_entered()
 
-export var cantidad_meteoritos:int = 10
+export var cantidad_meteoritos:int = 16
+
 export var intervalo_spawn:float = 1.2
 
 var spawners: Array
@@ -15,6 +16,7 @@ func _ready() -> void:
 	$SpawnTimer.wait_time = intervalo_spawn
 	almacenar_spawners()
 	conectar_seniales_detectores()
+	$TimerControlMeteoritos.start()
 
 func conectar_seniales_detectores() ->void:
 	for detector in $DetectorFueraDeZona.get_children():
@@ -35,21 +37,20 @@ func contr_sector(posicion: Vector2, cant_meteor: int) -> void:
 	
 # Seniales Internas
 func _on_SpawnTimer_timeout() -> void:
-	if cantidad_meteoritos == 0:
-		$SpawnTimer.stop()
-		return
 	spawners[spawner_aleatorio()].spawnear_meteorito()
-	cantidad_meteoritos -= 1
-	cantidad_meteoritos += 1
-	
-	
+
 
 func _on_detector_body_entered(body: Node) ->void:
-	body.set_esta_en_sector(false)
+	if body is Meteorito:
+		body.set_esta_en_sector(false)
+	if body is EnemigoInterceptor:
+		DatosJuego.set_enem_esta_sector(true)
 
 
-		
-		
-
-
-
+func _on_TimerControlMeteoritos_timeout() -> void:
+	if cantidad_meteoritos == 0:
+		$SpawnTimer.stop()
+		$TimerControlMeteoritos.stop()
+		return
+	cantidad_meteoritos -= 1
+	print(cantidad_meteoritos)

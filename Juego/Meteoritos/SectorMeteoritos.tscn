@@ -85,7 +85,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 2.5, 5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, -10.0, -25.0 ]
+"values": [ -10.0, -20.0, -30.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CanvasLayer/ColorRect:modulate")
@@ -168,7 +168,7 @@ tracks/2/keys = {
 
 [node name="SectorMeteoritos" type="Node2D"]
 script = ExtResource( 2 )
-intervalo_spawn = 1.5
+intervalo_spawn = 2.0
 
 [node name="BordesNavePlayer" type="Node2D" parent="."]
 
@@ -300,32 +300,35 @@ position = Vector2( 1151, 360 )
 direccion = Vector2( -2, -1 )
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 1.2
 autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 visible = false
+modulate = Color( 1, 1, 1, 0 )
 margin_right = 1916.0
 margin_bottom = 1086.0
 color = Color( 1, 0, 0, 0.2 )
 
 [node name="Label" type="Label" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -425.643
-margin_top = -68.9586
-margin_right = 461.357
-margin_bottom = 57.0414
+margin_left = -443.5
+margin_top = -67.7567
+margin_right = 443.5
+margin_bottom = 58.2433
 custom_fonts/font = SubResource( 11 )
-text = "	                              ADVERTENCIA! 
+text = "	                        ADVERTENCIA! 
     LLUVIA DE METEORITOS INMINENTE"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -40.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "advertencia"
@@ -333,4 +336,8 @@ anims/RESET = SubResource( 15 )
 anims/advertencia = SubResource( 10 )
 anims/default = SubResource( 9 )
 
+[node name="TimerControlMeteoritos" type="Timer" parent="."]
+wait_time = 10.0
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="TimerControlMeteoritos" to="." method="_on_TimerControlMeteoritos_timeout"]

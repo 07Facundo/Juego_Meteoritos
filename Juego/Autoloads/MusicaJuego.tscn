@@ -1,15 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Juego/Autoloads/MusicaJuego.gd" type="Script" id=1]
 [ext_resource path="res://Juego/Niveles/Musicas/music_menu_principal.wav" type="AudioStream" id=2]
 [ext_resource path="res://Juego/Autoloads/botonSfx.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Juego/Niveles/Musicas/Music_nivel1.wav" type="AudioStream" id=4]
 
 [node name="MusicaJuego" type="Node"]
 script = ExtResource( 1 )
 
 [node name="MusicaNivel" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
 
 [node name="MusicaCombate" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
 
 [node name="TweenMusicaOn" type="Tween" parent="."]
 
@@ -17,12 +20,20 @@ script = ExtResource( 1 )
 
 [node name="MusicaMenuPrincipal" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+volume_db = -10.0
 bus = "Musica"
 
 [node name="BotonMenu" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -5.0
 bus = "Botones"
+
+[node name="MusicaMenuVictoria" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -15.0
 
 [connection signal="finished" from="MusicaNivel" to="." method="_on_MusicaNivel_finished"]
 [connection signal="finished" from="MusicaCombate" to="." method="_on_MusicaCombate_finished"]
 [connection signal="tween_completed" from="TweenMusicaOff" to="." method="_on_TweenMusicaOff_tween_completed"]
+[connection signal="finished" from="MusicaMenuPrincipal" to="." method="_on_MusicaMenuPrincipal_finished"]
+[connection signal="finished" from="MusicaMenuVictoria" to="." method="_on_MusicaMenuVictoria_finished"]

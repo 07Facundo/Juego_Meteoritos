@@ -11,6 +11,8 @@ var ruta:Path2D
 var path_follow: PathFollow2D
 
 
+
+
 func _ready() -> void:
 	Eventos.connect("base_destruida", self, "_on_base_destruida")
 	canion.set_esta_disparando(true)

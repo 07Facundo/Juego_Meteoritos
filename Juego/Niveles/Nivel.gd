@@ -9,9 +9,11 @@ export var sector_meteoritos: PackedScene = null
 export var tiempo_transicion_camara: float = 2.0
 export var enemigo_interceptor:PackedScene = null
 export var rele_masa:PackedScene = null
-export var tiempo_limite:int = 120
+export var tiempo_limite:int = 270
 export var musica_nivel:AudioStream = null
 export var musica_combate:AudioStream = null
+export (String, FILE, "*.tscn") var prox_nivel = ""
+
 ## Metodos
 
 
@@ -38,6 +40,7 @@ func _ready() -> void:
 	player = DatosJuego.get_player_actual()
 	numero_bases_enemigas = contabilizar_bases_enemigas()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	MusicaJuego.onof_musicas_princ(false)
 	MusicaJuego.set_streams(musica_nivel, musica_combate)
 	MusicaJuego.play_musica_nivel()
 	actualizador_timer.start()
@@ -63,7 +66,8 @@ func conectar_seniales () -> void:
 	Eventos.connect("nave_en_sector_peligro",self, "_on_nave_en_sector_peligro")
 	Eventos.connect("base_destruida",self, "_on_base_destruida")
 	Eventos.connect("spawn_orbital",self, "_on_spawn_orbital")
-	
+	Eventos.connect("nivel_completado", self, "_on_nivel_completado")
+
 func crear_contenedores () -> void:
 	contenedor_proyectiles = Node.new()
 	contenedor_proyectiles.name = "ContenedorProyectiles"
@@ -80,7 +84,12 @@ func crear_contenedores () -> void:
 	contenedor_enemigos = Node.new()
 	contenedor_enemigos.name = "ContenedorEnemigos"
 	add_child(contenedor_enemigos)
-	
+
+func _on_nivel_completado() ->void:
+	Eventos.emit_signal("nivel_terminado")
+	yield(get_tree().create_timer(1.0), "timeout")
+	get_tree().change_scene(prox_nivel)
+
 func _on_disparo(proyectil: Proyectil) -> void:
 	contenedor_proyectiles.add_child (proyectil)
 
@@ -92,11 +101,21 @@ func _on_nave_destruida(nave: RigidBody2D, posicion: Vector2, num_explosiones: i
 			camara_nivel,
 			tiempo_transicion_camara
 			)
-		$RestartTimer.start()
+#		$RestartTimer.start()
+		_on_level_finished()
+		
+		
 	elif nave is EnemigoInterceptor:
 		cant_enemigos -= 1
-		if cant_enemigos == 0:
+		print(cant_enemigos)
+		if cant_enemigos == 0 and not DatosJuego.enem_esta_sector:
 			MusicaJuego.transicion_musicas()
+			
+		if cant_enemigos == 0:
+			DatosJuego.set_pers_enem_interc_activado(false)
+			
+			
+		
 	crear_explosion(posicion, num_explosiones, 0.6, Vector2(100.0, 50.0))
 	
 
@@ -158,15 +177,21 @@ func _on_destruccion_meteor(posicion: Vector2) ->void:
 	
 func _on_nave_en_sector_peligro(centro_cam: Vector2, tipo_peligro:String, num_peligros:int) ->void:
 	if tipo_peligro == "Meteorito":
+		player.position = centro_cam
 		_crear_sector_meteoritos(centro_cam, num_peligros)
+		
 		Eventos.emit_signal("cambio_numero_meteoritos", num_peligros)
 	elif tipo_peligro == "Enemigo":
 		crear_sector_enemigos(num_peligros)
+		DatosJuego.set_pers_enem_interc_activado(true)
+		print(DatosJuego.pers_enem_interc_activado)
 	
 func _crear_sector_meteoritos(centro_cam: Vector2, num_peligros: int) ->void:
-	MusicaJuego.transicion_musicas()
+	if MusicaJuego.musica_combate.is_playing():
+		pass
+	else:
+		MusicaJuego.transicion_musicas()
 	meteoritos_totales = num_peligros
-	print(meteoritos_totales)
 	var new_sector_meteoritos:SectorMeteoritos = sector_meteoritos.instance()
 	new_sector_meteoritos.contr_sector(centro_cam, num_peligros)
 	camara_nivel.global_position = centro_cam
@@ -196,7 +221,6 @@ func transicion_camaras(desde: Vector2, hasta:Vector2, camara_actual: Camera2D, 
 func controlar_meteoritos_restantes() ->void:
 	meteoritos_totales -= 1
 	Eventos.emit_signal("cambio_numero_meteoritos", meteoritos_totales)
-	print(meteoritos_totales)
 	if meteoritos_totales == 0:
 		MusicaJuego.transicion_musicas()
 		contenedor_sec_meteor.get_child(0).queue_free()
@@ -236,11 +260,14 @@ func _on_TweenCamera_tween_completed(object: Object, _key: NodePath) -> void:
 
 
 func _on_RestartTimer_timeout() -> void:
+	pass
+		
+
+func _on_level_finished():
 	Eventos.emit_signal("nivel_terminado")
-	yield(get_tree().create_timer(1.0),"timeout")
+	yield(get_tree().create_timer(2.0),"timeout")
 	get_tree().reload_current_scene()
-
-
+	
 func _on_ActualizadorTimer_timeout() -> void:
 	tiempo_limite -= 1
 	Eventos.emit_signal("actualizar_tiempo", tiempo_limite)

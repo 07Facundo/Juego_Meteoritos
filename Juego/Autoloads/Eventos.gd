@@ -14,6 +14,8 @@ signal base_destruida(base, posiciones)
 
 signal spawn_orbital(orbital)
 
+signal nivel_completado()
+
 #HUD
 
 signal nivel_iniciando()

@@ -27,9 +27,10 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 func _on_DetectorPlayer_body_entered (body: Node) -> void:
 	$DetectorPlayer/CollisionShape2D.set_deferred ("disabled", true)
 	$AnimationPlayer.play("super_activado")
-	body.desactivar_controles()
-	atraer_player(body)
+	if body is Player:
+		body.desactivar_controles()
+		atraer_player(body)
 
 
 func _on_Tween_tween_all_completed() -> void:
-	print("Sos un crack, pasaste de nivel!!!")
+	Eventos.emit_signal("nivel_completado")

@@ -55,7 +55,6 @@ func crear(pos: Vector2, dir: Vector2, tamanio: float) -> void:
 #Calcular hitpoints
 	hitpoints = hitpoints_base * tamanio
 #Solo Debug
-	print("hitpoints: ", hitpoints)
 
 
 func recibir_danio(danio: float) -> void:

@@ -205,10 +205,10 @@ tracks/4/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 530.83
+radius = 731.205
 
 [sub_resource type="CircleShape2D" id=7]
-radius = 898.286
+radius = 1267.61
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.615686, 0, 1, 1 )
@@ -268,7 +268,6 @@ collision_layer = 0
 shape = SubResource( 6 )
 
 [node name="AreaDeteccion" type="Area2D" parent="." index="7"]
-visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeteccion" index="0"]

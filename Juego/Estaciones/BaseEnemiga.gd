@@ -104,7 +104,6 @@ func _on_AreaCollision_body_entered(body: Node) -> void:
 
 func _on_VisibilityNotifier2D_screen_entered() -> void:
 	$VisibilityNotifier2D.queue_free()
-
 	posicion_spawn = deteccion_cuadrante()
 	spawnear_orbital()
 	timer_spawner.start()
@@ -118,3 +117,11 @@ func _on_TimerSpawnerEnemigos_timeout() -> void:
 	spawnear_orbital()
 
 
+func _on_DetectorPlayer_body_entered(body: Node) -> void:
+	if body is Player and not DatosJuego.pers_enem_interc_activado:
+		MusicaJuego.transicion_musicas()
+
+
+func _on_DetectorPlayer_body_exited(body: Node) -> void:
+	if body is Player and not DatosJuego.pers_enem_interc_activado:
+		MusicaJuego.transicion_musicas()

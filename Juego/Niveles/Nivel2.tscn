@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Juego/Niveles/NivelBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Juego/Estaciones/EstacionRecarga.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Juego/Estaciones/BaseEnemiga.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Juego/Peligros/SectorDePeligro.tscn" type="PackedScene" id=4]
+
+[node name="Nivel2" instance=ExtResource( 1 )]
+tiempo_limite = 180
+prox_nivel = "res://Juego/Niveles/Nivel3.tscn"
+
+[node name="SectorDePeligro" parent="TriggersLLuviaMeteoritos" index="0" instance=ExtResource( 4 )]
+position = Vector2( 7372.98, -3390.49 )
+numero_peligros = 4
+
+[node name="EstacionRecarga" parent="ContenedorEstaciones" index="0" instance=ExtResource( 2 )]
+position = Vector2( 5995.84, -5050.54 )
+
+[node name="BaseEnemiga" parent="ContenedorBasesEnemigas" index="0" instance=ExtResource( 3 )]
+position = Vector2( 9767.76, -18.8919 )
+numero_orbitales = 12
+
+[node name="BaseEnemiga2" parent="ContenedorBasesEnemigas" index="1" instance=ExtResource( 3 )]
+position = Vector2( -42.3213, -7657.22 )
+numero_orbitales = 12
+
+[node name="StarFieldBackground" parent="." index="9"]
+color_fondo = Color( 0.0117647, 0.0117647, 0.109804, 1 )
+
+[node name="ColorRect" parent="StarFieldBackground" index="0"]
+color = Color( 0.0117647, 0.0117647, 0.109804, 1 )
+
+[editable path="StarFieldBackground"]

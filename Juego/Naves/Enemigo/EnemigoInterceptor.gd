@@ -8,10 +8,11 @@ enum ESTADO_IA {IDLE, ATACANDOQ, ATACANDOP, PERSECUCION}
 export var potencia_max:float = 600.0
 
 ## Atributos
-var estado_ia_actual:int = ESTADO_IA.IDLE
+var estado_ia_actual:int = ESTADO_IA.ATACANDOP
 var potencia_actual:float = 0.0
-## Metodos
 
+
+## Metodos
 func _ready() -> void:
 	Eventos.emit_signal("minimapa_objeto_creado")
 
