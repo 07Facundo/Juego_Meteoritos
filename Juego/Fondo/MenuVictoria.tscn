@@ -1,17 +1,17 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://TemporalAssets/kenney_kenney-fonts/Fonts/Kenney Blocks.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://TemporalAssets/kenney_kenney-fonts/Fonts/Kenney Rocket.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Juego/Fondo/Label_Kenney Blocks.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Juego/Fondo/Botones_Kenney_Rocket.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Juego/Naves/Player/player_orange.png" type="Texture" id=4]
 [ext_resource path="res://Juego/Fondo/MenuVictoria.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 66
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 66
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 82
